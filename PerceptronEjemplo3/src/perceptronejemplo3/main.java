@@ -1,20 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package perceptronejemplo3;
 
-/**
- *
- * @author manue
- */
-public class PerceptronEjemplo3 {
+public class main {
+    Perceptron p;
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public main() throws InterruptedException {
+        double[] objetivos = { 1, 2, 3, 4 };
+        double[][] datos = { { 0, 1, 0 }, { 1, 0, 1 }, { 1, 1, 0 }, { 1, 0, 0 } };
+        p = new Perceptron();
+        int x = 0;
+        while (x < 50) {
+            p.setDatos(datos);
+            p.setObjetivos(objetivos);
+            p.InicializarBaseDeConocimiento();
+            p.Entrenamiento();
+            System.out.println("Procesando informacion espere....." + "Actividades: " + x + "-50");
+            Thread.sleep(1000);
+            x++;
+        }
     }
-    
+
+    public static void main(String[] args) throws InterruptedException {
+        new main();
+    }
+
 }
