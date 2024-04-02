@@ -7,7 +7,6 @@ public class Main {
     double[][] entradas = {{0, 0}, {0, 1}, {1, 0}, {1, 1}};
     int[] salida1 = {0, 1, 1, 0};
     int[] salida2 = {1, 0, 0, 1};
-    Neurona n;
 
     public Main() {
         Perceptron p1 = new Perceptron(2);
