@@ -1,6 +1,9 @@
 package Perceptron;
 
 import java.util.ArrayList;
+import java.util.Random;
+import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 
 public class Neurona {
 
@@ -68,12 +71,52 @@ public class Neurona {
                 }
             }
         }
-
         return 0;
     }
 
+    public void entrenamiento(JTextArea textArea, String nombre) {
+        Random random = new Random();
+        int[] iteracion = {0};
+        
+        while (true) {
+            // Generamos el número de sílabas que formarán la combinación (2)
+            int numSilabas = 2;
+            int indice;
+            
+            // Creamos una lista para almacenar las sílabas seleccionadas
+            StringBuilder combinacion = new StringBuilder();
+            // Generamos una combinación aleatoria de sílabas
 
-    public void entrenamiento(String nombre) {
-
+            
+            for (int i = 0; i < numSilabas; i++) {
+                // Seleccionamos un índice aleatorio
+                indice = random.nextInt(silabas.size());
+                // Concatenamos la sílaba correspondiente al índice
+                combinacion.append(silabas.get(indice));
+            }
+            
+            // Imprimimos la combinación actual
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    textArea.append("Palabra actual: " + combinacion + " - " + iteracion[0] + "\n");
+                    System.out.println(".run()");
+                }
+            });
+            //System.out.println("Palabra actual: " + combinacion + " - " + iteracion[0] + "\n");
+            
+            // Revisamos si la combinación forma la palabra deseada
+            if (combinacion.toString().equals(nombre)) {
+                // Actualizar la interfaz gráfica desde el hilo de eventos de Swing
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        textArea.append("Palabra encontrada: " + combinacion.toString() + " - " + iteracion[0] + "\n");
+                    }
+                });
+                break;
+            }
+            iteracion[0]++;
+        }
     }
 }
